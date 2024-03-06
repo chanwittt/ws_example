@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ws-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ws
+  template:
+    metadata:
+      labels:
+        app: ws
+    spec:
+      containers:
+      - name: websocket
+        image: ghcr.io/chanwittt/example-ws:latest
+        ports:
+        - containerPort: 4001
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ws-svc
+spec:
+  ports:
+  - port: 80
+    targetPort: 4001
+    protocol: TCP
+    name: http
+  selector:
+    app: ws
