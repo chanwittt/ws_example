@@ -15,6 +15,7 @@ spec:
       containers:
       - name: websocket
         image: ghcr.io/chanwittt/example-ws:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 4001
 ---
